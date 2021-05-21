@@ -2,7 +2,7 @@
 FROM node:alpine AS ci-ui
 WORKDIR /app
 COPY . .
-RUN npm run build
+RUN npm ci && npm run build
 
 # stage 2
 FROM nginx:alpine
