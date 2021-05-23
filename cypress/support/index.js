@@ -16,11 +16,5 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 
-// Import server and stubs
-import './server';
-
-// Enables printing the log of failed tests in CI
-import 'cypress-failed-log';
-
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
