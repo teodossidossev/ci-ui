@@ -22,9 +22,6 @@ script:
   - npm run lint
   - npm run cy:ci
 
-before_deploy:
-  - docker build -t teodossidossev/ci-ui .
-
 deploy:
   - provider: script
     script: bash docker_push
