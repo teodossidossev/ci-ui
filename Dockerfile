@@ -7,6 +7,6 @@ COPY . .
 RUN npm run build
 
 # stage 2
-FROM nginx:alpine
+FROM nginx
 COPY --from=ci-ui /app/dist/ci-ui /usr/share/nginx/html
 EXPOSE 80
