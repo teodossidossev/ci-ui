@@ -5,6 +5,9 @@ node_js:
 
 dist: trusty
 
+services:
+  - docker
+
 if: type = pull_request OR branch = main OR tag IS present
 
 addons:
