@@ -28,6 +28,5 @@ before_deploy:
 deploy:
   - provider: script
     script: bash docker_push
-    email: $DOCKER_EMAIL
     on:
       tags: true
