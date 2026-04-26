@@ -1,12 +1,12 @@
-# stage 1: build the Angular app
-FROM node:14-alpine AS build
+# stage 1
+FROM node:alpine AS ci-ui
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
 COPY . .
-RUN npm run build -- --configuration production
+RUN npm run build
 
-# stage 2: serve the static bundle
-FROM nginx:1.25-alpine
-COPY --from=build /app/dist/ci-ui /usr/share/nginx/html
+# stage 2
+FROM nginx
+COPY --from=ci-ui /app/dist/ci-ui /usr/share/nginx/html
 EXPOSE 80

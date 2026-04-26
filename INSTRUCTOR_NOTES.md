@@ -12,14 +12,10 @@ project stays small and teachable.
 - **Removed `tslint.json`.** Linting already runs through ESLint
   (`@angular-eslint`); `tslint` was dead config and a dead
   dev-dependency.
-- **Pinned Docker base images.** `Dockerfile` now uses
-  `node:14-alpine` (matches the supported Node range for Angular
-  11) and `nginx:1.25-alpine`, so `docker build` is reproducible
-  rather than drifting with the `latest` tag.
 - **Replaced the deprecated `--prod` flag** with
-  `--configuration production` in `Dockerfile` and in the
-  `cy:ci` script. Added a `build:prod` alias so downstream
-  scripts (and student CI jobs) have a stable entry point.
+  `--configuration production` in the `cy:ci` script. Added a
+  `build:prod` alias so downstream scripts (and student CI jobs)
+  have a stable entry point.
 - **Added a `test:ci` script and a `ChromeHeadlessCI` Karma
   launcher** (`--no-sandbox --disable-gpu`) so unit tests can run
   single-shot in a container without a display.
@@ -46,6 +42,11 @@ project stays small and teachable.
 - **No automated Docker push, no release flow, no DockerHub
   credentials wiring.** Students decide which jobs publish
   artifacts and how secrets are scoped.
+- **`Dockerfile` is left as it was on `main`** (`node:alpine`
+  and `nginx` with no version pins). Pinning is a useful
+  conversation to have with students — they can choose whether
+  to pin in their CI work. Determinism is intentionally not
+  pre-solved here.
 - **Angular 11, Node 14, Cypress 7 are kept as-is.** This is a
   CI/CD exercise, not a framework migration. Bumping major
   versions would expand scope and obscure the CI work.
