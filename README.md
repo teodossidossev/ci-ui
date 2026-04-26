@@ -1,27 +1,91 @@
-# CiUi
+# ci-ui
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.1.4.
+A small Angular 11 application used as the subject of a CI/CD
+teaching exercise. The app itself just renders `Hello Docker world!`
+— the interesting part is the surrounding lint, test, e2e and
+Docker tooling.
 
-## Development server
+## Requirements
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+- Node 14 (see `.nvmrc`)
+- npm 6+
+- Chrome (for unit tests via Karma and for `cypress open`)
+- Docker (for the container build)
 
-## Code scaffolding
+## Install
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+```bash
+npm ci
+```
 
-## Build
+## Run the dev server
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+```bash
+npm start
+```
 
-## Running unit tests
+Navigate to <http://localhost:4200/>. The app reloads when source
+files change.
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Lint
 
-## Running end-to-end tests
+```bash
+npm run lint
+```
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+Linting is wired through ESLint (`@angular-eslint`).
 
-## Further help
+## Unit tests
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+Interactive (watch mode in a real Chrome window):
+
+```bash
+npm test
+```
+
+Single-run, headless — suitable for CI:
+
+```bash
+npm run test:ci
+```
+
+## End-to-end tests (Cypress)
+
+Interactive runner:
+
+```bash
+npm run cy:open
+```
+
+Headless run against a production build served on
+`localhost:4200`:
+
+```bash
+npm run cy:ci
+```
+
+## Production build
+
+```bash
+npm run build:prod
+```
+
+Build output lands in `dist/ci-ui`.
+
+## Docker
+
+The `Dockerfile` is a two-stage build: stage 1 builds the Angular
+app with Node 14, stage 2 serves the static bundle from nginx.
+
+```bash
+docker build -t ci-ui .
+docker run --rm -p 8080:80 ci-ui
+```
+
+Then open <http://localhost:8080/>.
+
+## Continuous integration
+
+This branch intentionally **does not ship a CI workflow**. Wiring
+the lint / unit test / build / Cypress / Docker steps into GitHub
+Actions is the exercise — see `INSTRUCTOR_NOTES.md` for scope.
