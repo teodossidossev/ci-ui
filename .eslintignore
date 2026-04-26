@@ -1,8 +1,0 @@
-# Ignore tests
-src/**/*.spec.ts
-src/**/*.ico
-src/**/*.scss
-src/**/*.json
-
-# Ignore styling
-src/**/*.css
