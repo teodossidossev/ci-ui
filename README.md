@@ -1,14 +1,14 @@
 # ci-ui
 
-A small Angular 11 application used as the subject of a CI/CD
+A small Angular 21 application used as the subject of a CI/CD
 teaching exercise. The app itself just renders `Hello Docker world!`
 — the interesting part is the surrounding lint, test, e2e and
 Docker tooling.
 
 ## Requirements
 
-- Node 14 (see `.nvmrc`)
-- npm 6+
+- Node 22 LTS (see `.nvmrc`)
+- npm 10+
 - Chrome (for unit tests via Karma and for `cypress open`)
 - Docker (for the container build)
 
@@ -33,7 +33,8 @@ files change.
 npm run lint
 ```
 
-Linting is wired through ESLint (`@angular-eslint`).
+Linting is wired through ESLint flat config (`eslint.config.js`)
+and `angular-eslint`.
 
 ## Unit tests
 
@@ -75,7 +76,8 @@ Build output lands in `dist/ci-ui`.
 ## Docker
 
 The `Dockerfile` is a two-stage build: stage 1 builds the Angular
-app with Node 14, stage 2 serves the static bundle from nginx.
+app under `node:alpine`, stage 2 serves the static bundle from
+nginx.
 
 ```bash
 docker build -t ci-ui .
