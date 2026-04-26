@@ -26,10 +26,10 @@ describe('AppComponent', () => {
     expect(app.title).toEqual('ci-ui');
   });
 
-  it('should render title', () => {
+  it('should render the welcome message', () => {
     const fixture = TestBed.createComponent(AppComponent);
     fixture.detectChanges();
-    const compiled = fixture.nativeElement;
-    expect(compiled.querySelector('.content span').textContent).toContain('ci-ui app is running!');
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Hello Docker world!');
   });
 });
